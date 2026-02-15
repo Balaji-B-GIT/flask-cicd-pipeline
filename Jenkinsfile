@@ -10,17 +10,24 @@ environment {
 stages {
 
     stage('SonarQube Analysis') {
-        steps {
-            withSonarQubeEnv('sonarqube') {
-                sh '''
-                sonar-scanner \
-                  -Dsonar.projectKey=flask-cicd-pipeline \
-                  -Dsonar.sources=. \
-                  -Dsonar.login=$SONAR_AUTH_TOKEN
-                '''
-            }
+    agent {
+        docker {
+            image 'sonarsource/sonar-scanner-cli'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh '''
+            sonar-scanner \
+              -Dsonar.projectKey=flask-cicd-pipeline \
+              -Dsonar.sources=. \
+              -Dsonar.login=$SONAR_AUTH_TOKEN
+            '''
+        }
+    }
+}
+
 
     stage('Build Docker Image') {
         steps {
