@@ -2,7 +2,7 @@ pipeline {
 agent any
 
 environment {
-    DOCKER_IMAGE = "balaji782/flask-demo:latest"
+    DOCKER_IMAGE = "balaji782/flask-cicd-pipeline:latest"
     SONAR_AUTH_TOKEN = credentials('sonar-token')
 }
 
