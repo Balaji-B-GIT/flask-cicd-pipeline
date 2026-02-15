@@ -2,7 +2,7 @@ pipeline {
 agent any
 
 environment {
-    DOCKER_IMAGE = "<dockerhub-username>/flask-demo:latest"
+    DOCKER_IMAGE = "balaji782/flask-demo:latest"
     SONAR_AUTH_TOKEN = credentials('sonar-token')
 }
 
