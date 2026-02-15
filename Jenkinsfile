@@ -23,7 +23,7 @@ stages {
                   -Dsonar.projectKey=flask-cicd-pipeline \
                   -Dsonar.sources=. \
                   -Dsonar.userHome=.sonar \
-                  -Dsonar.host.url=http://172.17.0.1:9000 \
+                  -Dsonar.host.url=http://localhost:9000 \
                   -Dsonar.login=$SONAR_AUTH_TOKEN
                 '''
 
