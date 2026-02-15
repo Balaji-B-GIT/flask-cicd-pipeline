@@ -1,4 +1,5 @@
 pipeline {
+
 agent any
 
 environment {
@@ -8,29 +9,18 @@ environment {
 
 stages {
 
-    stage('Install Dependencies') {
-    steps {
-        sh '''
-        python3 -m venv venv
-        . venv/bin/activate
-        pip install -r requirements.txt
-        '''
-    }
-}
-
     stage('SonarQube Analysis') {
-    steps {
-        withSonarQubeEnv('sonarqube') {
-            sh '''
-            sonar-scanner \
-              -Dsonar.projectKey=flask-demo \
-              -Dsonar.sources=. \
-              -Dsonar.host.url=http://localhost:9000 \
-              -Dsonar.login=$SONAR_AUTH_TOKEN
-            '''
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh '''
+                sonar-scanner \
+                  -Dsonar.projectKey=flask-demo \
+                  -Dsonar.sources=. \
+                  -Dsonar.login=$SONAR_AUTH_TOKEN
+                '''
+            }
         }
     }
-}
 
     stage('Build Docker Image') {
         steps {
