@@ -14,7 +14,7 @@ stages {
             withSonarQubeEnv('sonarqube') {
                 sh '''
                 sonar-scanner \
-                  -Dsonar.projectKey=flask-demo \
+                  -Dsonar.projectKey=flask-cicd-pipeline \
                   -Dsonar.sources=. \
                   -Dsonar.login=$SONAR_AUTH_TOKEN
                 '''
