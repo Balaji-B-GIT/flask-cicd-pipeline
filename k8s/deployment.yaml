@@ -1,32 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-demo
+  name: flask-cicd-pipeline
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-demo
+      app: flask-cicd-pipeline
   template:
     metadata:
       labels:
-        app: flask-demo
+        app: flask-cicd-pipeline
     spec:
       containers:
-      - name: flask-demo
-        image: <dockerhub-username>/flask-demo:latest
+      - name: flask-cicd-pipeline
+        image: balaji783/flask-cicd-pipeline:latest
         ports:
         - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-demo-service
+  name: flask-cicd-pipeline-service
 spec:
   type: NodePort
   selector:
-    app: flask-demo
+    app: flask-cicd-pipeline
   ports:
   - port: 5000
     targetPort: 5000
     nodePort: 30007
+
