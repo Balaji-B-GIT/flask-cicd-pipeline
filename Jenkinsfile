@@ -13,25 +13,22 @@ stages {
     agent {
         docker {
             image 'sonarsource/sonar-scanner-cli'
-            args '-u root'
+            args '--network=host -u root'
         }
     }
     steps {
         withSonarQubeEnv('sonarqube') {
             sh '''
-                sonar-scanner \
-                  -Dsonar.projectKey=flask-cicd-pipeline \
-                  -Dsonar.sources=. \
-                  -Dsonar.userHome=.sonar \
-                  -Dsonar.host.url=http://localhost:9000 \
-                  -Dsonar.login=$SONAR_AUTH_TOKEN
-                '''
-
+            sonar-scanner \
+              -Dsonar.projectKey=flask-cicd-pipeline \
+              -Dsonar.sources=. \
+              -Dsonar.userHome=.sonar \
+              -Dsonar.host.url=http://localhost:9000 \
+              -Dsonar.login=$SONAR_AUTH_TOKEN
+            '''
         }
     }
 }
-
-
 
     stage('Build Docker Image') {
         steps {
