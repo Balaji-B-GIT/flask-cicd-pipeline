@@ -13,7 +13,7 @@ stages {
     agent {
         docker {
             image 'sonarsource/sonar-scanner-cli'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-u root'
         }
     }
     steps {
@@ -22,11 +22,13 @@ stages {
             sonar-scanner \
               -Dsonar.projectKey=flask-cicd-pipeline \
               -Dsonar.sources=. \
+              -Dsonar.userHome=.sonar \
               -Dsonar.login=$SONAR_AUTH_TOKEN
             '''
         }
     }
 }
+
 
 
     stage('Build Docker Image') {
