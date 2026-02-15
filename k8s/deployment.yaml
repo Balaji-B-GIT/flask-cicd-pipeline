@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-cicd-pipeline
-        image: balaji783/flask-cicd-pipeline:latest
+        image: balaji782/flask-cicd-pipeline:latest
         ports:
         - containerPort: 5000
 ---
@@ -30,4 +30,5 @@ spec:
   - port: 5000
     targetPort: 5000
     nodePort: 30007
+
 
