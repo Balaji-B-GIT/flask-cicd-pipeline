@@ -1,0 +1,5 @@
+.sonar
+.git
+.gitignore
+venv
+__pycache__
