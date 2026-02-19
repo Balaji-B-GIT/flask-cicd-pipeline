@@ -8,7 +8,12 @@ environment {
 }
 
 stages {
-
+    
+    stage('Clean Workspace') {
+    steps {
+        cleanWs()
+    }
+}
     stage('SonarQube Analysis') {
     agent {
         docker {
